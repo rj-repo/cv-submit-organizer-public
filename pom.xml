@@ -25,7 +25,7 @@
     </modules>
 
     <properties>
-        <sonar.organization>rj-repos</sonar.organization>
+        <sonar.organization>rj-public</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
