@@ -1,0 +1,73 @@
+version: "3.8"
+
+networks:
+  public:
+  internal:
+
+
+services:
+  
+  eureka:
+    build: ./service-registry-eureka/
+    image: eureka-server:0.1
+    container_name: eureka
+    ports:
+      - "8999:8999"
+    networks:
+      - internal
+
+  db:
+    image: postgres:14.4
+    restart: always
+    container_name: organizer-db
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: organizer
+    ports:
+      - "5432:5432"
+    networks:
+      - internal
+  
+  auth:
+    build: ./auth-service/
+    image: auth-service:0.1
+    container_name: auth
+    depends_on:
+      - eureka
+      - db
+    networks:
+      - internal
+
+  user:
+    build: ./user-service/
+    image: user-service:0.1
+    container_name: user
+    depends_on:
+      - eureka
+      - db
+    networks:
+      - internal
+
+  application:
+    build: ./application-service/
+    image: application-service:0.1
+    container_name: user
+    depends_on:
+      - eureka
+      - db
+    networks:
+      - internal
+  
+  api-gateway:
+    build: ./api-gateway/
+    image: api-gateway:0.1
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth
+    networks:
+      - public
+      - internal
+  
