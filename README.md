@@ -55,3 +55,7 @@ Very basic theoretical flow:
 - modification job
 - deleting job
 - retrieve all user jobs (via pagination)
+
+### SonarQube summary
+
+https://sonarcloud.io/project/overview?id=rj-public_rj-public
