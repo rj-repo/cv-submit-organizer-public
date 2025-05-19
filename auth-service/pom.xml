@@ -145,7 +145,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>org.rj.auth_service.AuthServiceApplication</mainClass>
+                    <mainClass>org.rj.auth.AuthServiceApplication</mainClass>
                     <layout>JAR</layout>
                 </configuration>
             </plugin>

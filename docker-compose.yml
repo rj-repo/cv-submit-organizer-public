@@ -52,7 +52,7 @@ services:
   application:
     build: ./application-service/
     image: application-service:0.1
-    container_name: user
+    container_name: application
     depends_on:
       - eureka
       - db

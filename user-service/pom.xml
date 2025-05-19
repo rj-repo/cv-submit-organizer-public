@@ -134,7 +134,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>org.rj.user_service.UserServiceApplication</mainClass>
+					<mainClass>org.rj.user.UserServiceApplication</mainClass>
 					<layout>JAR</layout>
 				</configuration>
 			</plugin>
