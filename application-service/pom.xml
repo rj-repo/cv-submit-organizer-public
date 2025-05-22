@@ -121,7 +121,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>org.rj.application_job.ApplicationServiceApplication</mainClass>
+					<mainClass>org.rj.applications.ApplicationServiceApplication</mainClass>
 					<layout>JAR</layout>
 				</configuration>
 			</plugin>

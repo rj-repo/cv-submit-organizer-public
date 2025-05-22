@@ -15,7 +15,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
                 .should()
                 .dependOnClassesThat()
                 .resideInAPackage("org.springframework..")
-                .check(new ClassFileImporter().importPackages("org.rj.auth_service"));
+                .check(new ClassFileImporter().importPackages("org.rj.auth"));
     }
 
     @Test
@@ -26,6 +26,6 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
                 .should()
                 .dependOnClassesThat()
                 .resideInAPackage("..infrastructure..")
-                .check(new ClassFileImporter().importPackages("org.rj.auth_service"));
+                .check(new ClassFileImporter().importPackages("org.rj.auth"));
     }
 }

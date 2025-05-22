@@ -16,7 +16,11 @@ public class RouterValidator {
             "api/v1/auth/verification",
             "api/v1/auth/verification/resend",
             "api/v1/auth/validation",
-            "api/v1/profile/registration"
+            "api/v1/profile/registration",
+            "api/v1/applications/api-docs",
+            "api/v1/applications/swagger-ui",
+            "api/v1/profile/swagger-ui",
+            "api/v1/profile/swagger-ui"
     );
 
     public Predicate<ServerHttpRequest> isSecured =

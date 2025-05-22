@@ -20,21 +20,21 @@ Also, it has the goal to make possibility to have an organizer/manager for own C
         - flyway (dev DB versioning)
         - PostgresSQL 14.4
         - MailDev - imitates mailbox
+        - Swagger
     - testing
         - JUnit 5 (unit tests)
         - TestContainers (integration tests)
 - deployment
     - Docker
+    - Github Actions
 
 Future possible technologies:
 - frontend
-    - Angular (latest)
+    - Angular (latest) - already in progress
 - deployment
     - Kubernetes
-    - CI/CD as GitHub Actions
-    - Swagger (to auto-documentation)
 - architecture
-  - change to Event sourcing architecture
+  - migrate from synchronous to asynchronous (message broke such as Kafka)
 ## Architecture
 Main concepts used in application is hexagonal architecture and Domain Driven Design and microservices.
 
@@ -55,7 +55,3 @@ Very basic theoretical flow:
 - modification job
 - deleting job
 - retrieve all user jobs (via pagination)
-
-### SonarQube summary
-
-https://sonarcloud.io/project/overview?id=rj-public_rj-public

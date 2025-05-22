@@ -3,10 +3,12 @@ package org.rj.user.profile.application.rest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.rj.cvsubmitorganizer.common.ApiResponseException;
 import org.rj.user.profile.application.rest.dto.UserProfileDetailsResponse;
 import org.rj.user.profile.domain.model.GetMyProfileCommand;
 import org.rj.user.profile.domain.model.ModifyUserProfileCommand;
@@ -27,21 +29,24 @@ public class UserProfileResource {
     private final GetMyProfileUseCase getMyProfileUseCase;
     private final ModifyProfileUseCase modifyProfileUseCase;
 
+    @Operation(summary = "Register user")
+    @RequestBody(content = @Content(schema = @Schema(implementation = SaveNewUserCommand.class)))
+    @ApiResponses(value =
+            {@ApiResponse(responseCode = "200", description = "User has been registered"),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized"),
+                    @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(schema = @Schema(implementation = ApiResponseException.class))})})
     @PostMapping(path = "/registration")
     public ResponseEntity<Void> save(@RequestBody @Valid SaveNewUserCommand saveNewUserCommand) {
         saveUserProfileUseCase.save(saveNewUserCommand);
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Get a product by its id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the product",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserProfileDetailsResponse.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Product not found",
-                    content = @Content) })
+    @Operation(summary = "Get user profile")
+    @ApiResponses(value =
+            {@ApiResponse(responseCode = "200", description = "Profile user found", content = {@Content(schema = @Schema(implementation = UserProfileDetailsResponse.class))}),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized"),
+                    @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(schema = @Schema(implementation = ApiResponseException.class))}),
+                    @ApiResponse(responseCode = "404", description = "Profile not found", content = {@Content(schema = @Schema(implementation = ApiResponseException.class))})})
     @GetMapping(path = "/my-profile")
     public ResponseEntity<UserProfileDetailsResponse> getMyProfile(@RequestHeader("X-User-Id") String userId,
                                                                    @RequestHeader("X-Email") String email) {
@@ -49,6 +54,14 @@ public class UserProfileResource {
         return ResponseEntity.ok(UserProfileDetailsResponse.of(myProfile));
     }
 
+
+    @Operation(summary = "Update user profile email")
+    @RequestBody(content = @Content(schema = @Schema(implementation = ModifyUserProfileCommand.class)))
+    @ApiResponses(value =
+            {@ApiResponse(responseCode = "200", description = "Profile user found"),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized"),
+                    @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(schema = @Schema(implementation = ApiResponseException.class))}),
+                    @ApiResponse(responseCode = "404", description = "Product not found", content = {@Content(schema = @Schema(implementation = ApiResponseException.class))})})
     @PatchMapping(path = "/my-profile")
     public ResponseEntity<Void> updateMyProfile(@RequestHeader("X-User-Id") String userId,
                                                 @RequestBody @Valid ModifyUserProfileCommand modifyUserProfileCommand) {

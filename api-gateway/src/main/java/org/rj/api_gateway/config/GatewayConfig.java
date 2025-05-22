@@ -31,8 +31,8 @@ public class GatewayConfig {
             if (CorsUtils.isCorsRequest(request)) {
                 ServerHttpResponse response = ctx.getResponse();
                 HttpHeaders headers = response.getHeaders();
-                headers.add("Access-Control-Allow-Origin", "http://localhost:4200"); // Angular URL
-                headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+                headers.add("Access-Control-Allow-Origin", "http://localhost:4200"); //unfortunately currently hardcoded but only for testing
+                headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
                 headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization");
                 headers.add("Access-Control-Max-Age", "3600");
                 if (request.getMethod() == HttpMethod.OPTIONS) {
