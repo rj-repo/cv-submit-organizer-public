@@ -3,7 +3,6 @@ package org.rj.applications.application_job.application.rest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -32,7 +31,7 @@ public class ApplicationJobResource {
     private final ModifyJobApplicationUseCase modifyJobApplication;
     private final GetApplicationJobsUseCase getApplicationJobs;
 
-    @RequestBody(content = @Content(schema = @Schema(implementation = AddJobApplicationRequest.class)))
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(schema = @Schema(implementation = AddJobApplicationRequest.class)))
     @Operation(summary = "Add new job application")
     @ApiResponses(value =
             {@ApiResponse(responseCode = "200", description = "Application job has been added"),
@@ -75,7 +74,7 @@ public class ApplicationJobResource {
 
     @Operation(summary = "Get all job applications")
     @ApiResponses(value =
-            {@ApiResponse(responseCode = "200", description = "Get all applications job for specific user",content = {@Content(schema = @Schema(implementation = UserJobApplicationResponse.class))}),
+            {@ApiResponse(responseCode = "200", description = "Get all applications job for specific user", content = {@Content(schema = @Schema(implementation = UserJobApplicationResponse.class))}),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
                     @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(schema = @Schema(implementation = ApiResponseException.class))}),
                     @ApiResponse(responseCode = "404", description = "Not found", content = {@Content(schema = @Schema(implementation = ApiResponseException.class))})
@@ -84,7 +83,7 @@ public class ApplicationJobResource {
     public ResponseEntity<UserJobApplicationResponse> getJobs(@RequestHeader("X-User-Id") Long userId,
                                                               @RequestParam(value = "page") Long page,
                                                               @RequestParam(value = "pageSize", defaultValue = "10") Long pageSize) {
-        UserJobApplications jobs = getApplicationJobs.getJobs(new GetUserApplicationsJobCommand(page,pageSize,new UserProfileId(userId)));
+        UserJobApplications jobs = getApplicationJobs.getJobs(new GetUserApplicationsJobCommand(page, pageSize, new UserProfileId(userId)));
         return ResponseEntity.ok(UserJobApplicationResponse.toResponse(jobs));
     }
 

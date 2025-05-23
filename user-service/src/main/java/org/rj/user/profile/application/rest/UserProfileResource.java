@@ -3,7 +3,6 @@ package org.rj.user.profile.application.rest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -30,7 +29,7 @@ public class UserProfileResource {
     private final ModifyProfileUseCase modifyProfileUseCase;
 
     @Operation(summary = "Register user")
-    @RequestBody(content = @Content(schema = @Schema(implementation = SaveNewUserCommand.class)))
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(schema = @Schema(implementation = SaveNewUserCommand.class)))
     @ApiResponses(value =
             {@ApiResponse(responseCode = "200", description = "User has been registered"),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -56,7 +55,7 @@ public class UserProfileResource {
 
 
     @Operation(summary = "Update user profile email")
-    @RequestBody(content = @Content(schema = @Schema(implementation = ModifyUserProfileCommand.class)))
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(schema = @Schema(implementation = ModifyUserProfileCommand.class)))
     @ApiResponses(value =
             {@ApiResponse(responseCode = "200", description = "Profile user found"),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
